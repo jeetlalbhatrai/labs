@@ -15,6 +15,8 @@
     curl -s https://packages.cloud.google.com/apt/doc/apt-key.gpg | sudo apt-key add -
     sudo apt-get update ; clear
     sudo apt-get install -y kubelet kubeadm kubectl	
+######################( sudo swapoff -a and free -m)----- if not running kubernetes in Hyper V
+
 	
 ### Step2: `On Master only:`
 
@@ -99,3 +101,4 @@
 ```
 kubeadm token create --print-join-command --ttl=0
 ```
+###############

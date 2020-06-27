@@ -50,15 +50,22 @@ Install SonarQube-runner ( on Jenkins machine )
 				Name: sonarqube ( can be any string )
 				Server URL: http://192.168.40.128:9002 < http://<machine IP of where sonarqube is installed>:<port on which sonarqube is running>
 				Server authentication token: < the token you will get it when you login to sonarqube console )
+ 				Kind---> secret text---> paste secret token here. which created on sonarqube portal.
 				
 	Step3: SonarQube Runner Configuration in Jenkins
 			Manage Jenkins --> Global Tool Configuration --> SonarQube Scanner --> configure below
 				Name: sonar-runner ( can be any string )
 				SONAR_RUNNER_HOME: path of sonar-runner installation on Jenkins Server ( /opt/sonar-runner-dist-2.4 )
+				then go to /opt/sonar-runner-2.4/conf/-----> vi sonar.runner.properties ( change localhost ip where sonarqube is installation.--> sonarhost.url-----> http://localhost:9000/)
+
 
 ======================================================================================================
 
+<<<<<<< HEAD
 Job5-package:  build action --> select sonar runner execution
+=======
+Job5-package: build
+>>>>>>> f345369f1fab8105b6f3045607d3cf3d0fd2b32e
 
 	sonar        : 	sonar.projectKey=sampleapp
 					sonar.ProjectName=sampleapp
