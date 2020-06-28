@@ -20,6 +20,9 @@ kubectl expose rs <rsname> --port=<external> --type=NodePort # expose rs as serv
 kubectl delete rs <rsname>                  # delete rs & pod under it
 ```
 
+######Delete Daemonset PODS-
+kubectl delete daemonset fluentd-elasticsearch --namespace=kube-system
+
 ### Deployments:
 
 ```
