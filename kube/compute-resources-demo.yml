@@ -1,0 +1,12 @@
+@@@@@@@@@@@@@@@@@@@ Resource level restrictions on Namespaces.
+
+apiVersion: v1
+kind: ResourceQuota
+metadata:
+  name: compute-resources-demo
+spec:
+  hard:
+    requests.cpu: "1"
+    requests.memory: 1Gi
+    limits cpu: "2"
+    limits.memory: 2Gi
