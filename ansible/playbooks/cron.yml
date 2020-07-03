@@ -1,0 +1,8 @@
+- hosts: all
+  tasks:
+    - name:
+      cron:
+        name: "cheek dirs"
+        minute: "0"
+        hour: "5,2"
+        job: "ls -alh > /dev/null"
