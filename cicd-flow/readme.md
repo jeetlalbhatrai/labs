@@ -212,6 +212,22 @@ insdie job parameters as below
 	Build --> (click on dropdown) Execute Shell --> command (enter below in box)
 		cd $WORKSPACE/deploy
 		sudo su ansible -c "ansible-playbook -i /tmp/inv deploy.yml -e 'env=qa build=$Package_Build_Number'"
+                 OR
+		 sudo chown jenkins:jenkins /opt/deploy
+cd /opt/deploy
+sudo cp /var/lib/jenkins/workspace/4package/target/petclinic.war .
+sudo touch DockerFile
+sudo chown jenkins:jenkins DockerFile
+sudo cat <<EOT>> DockerFile
+From tomcat:8.5
+ADD petclinic.war /usr/local/tomcat/webapps
+CMD "catalina.sh" "run"
+Expose 80
+EOT
+sudo docker build -t jeetlalbhatrai/petclinic:$BUILD_NUMBER .
+sudo docker login -u jeetlalbhatrai -p
+sudo docker push jeetlalbhatrai/petclinic:$BUILD_NUMBER
+
 
 	Post-build Actions --> (click on dropdown) trigger parameterized build on other projects
 		Projects to build: job6-Selenium-test
