@@ -189,6 +189,25 @@ insdie job parameters as below
 		docker build -f Dockerfile -t lerndevops/samplejavaapp:$BUILD_NUMBER .  ## use your docker hub repo
 		docker login -u lerndevops -p $DOCKER_HUB_PWD  ## replace lerndevops with your docker hub username
 		docker push lerndevops/samplejavaapp:$BUILD_NUMBER
+		
+		OR
+		sudo chown jenkins:jenkins /opt/deploy
+cd /opt/deploy
+sudo cp /var/lib/jenkins/workspace/4package/target/sampleapp.war .
+sudo touch DockerFile
+sudo chown jenkins:jenkins DockerFile
+sudo cat <<EOT>> DockerFile
+From tomcat:8.5
+ADD sampleapp.war /usr/local/tomcat/webapps
+CMD "catalina.sh" "run"
+EXPOSE 8080
+EOT
+sudo docker build -f DockerFile -t jeetlalbhatrai/sampleapp:$BUILD_NUMBER .
+sudo docker login -u jeetlalbhatrai -p Welcome@123
+sudo docker push jeetlalbhatrai/sampleapp:$BUILD_NUMBER
+		
+		
+		
 
 	Post-build Actions --> (click on dropdown) trigger parameterized build on other projects
 		Projects to build: job5-deploy.qa
